@@ -39,7 +39,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.agendaapp.ui.theme.contacts
+import com.example.agendaapp.ui.theme.Contacts
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
                 }
                 composable(route="contacts/{body}"){
                     val body=it.arguments?.getString("body")?:""
-                    contacts(body)
+                    Contacts(body)
                 }
 
             }
