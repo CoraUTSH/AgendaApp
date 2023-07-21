@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
                 }
                 composable(route="contacts/{body}"){
                     val body=it.arguments?.getString("body")?:""
-                    Contacts(body)
+                    Contacts()
                 }
 
             }
