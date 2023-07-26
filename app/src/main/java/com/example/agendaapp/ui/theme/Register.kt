@@ -1,6 +1,8 @@
 package com.example.agendaapp.ui.theme
+
 import android.annotation.SuppressLint
 import android.content.ContentValues
+
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -21,6 +23,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,9 +40,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+
+import com.example.agendaapp.Navigation.AppScreen
 import com.example.agendaapp.R
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -150,8 +156,8 @@ fun RegisterBody(navController: NavController)
                 Button(
                     modifier = Modifier.padding(),
                     onClick = {
-                       // val datos =matricula + " " + nombre + " " + apellidos + " Tu email es " + email
-                        Toast.makeText(context, "Contacto registrado", Toast.LENGTH_SHORT).show()
+                        // val datos =matricula + " " + nombre + " " + apellidos + " Tu email es " + email
+
                         //onButtonClick(datos)
                         // Create a new user with a first and last name
                         val user = hashMapOf(
@@ -163,16 +169,26 @@ fun RegisterBody(navController: NavController)
 // Add a new document with a generated ID
                         db.collection("Contactos")
                             .add(user)
+
                             .addOnSuccessListener { documentReference ->
                                 Log.d(
                                     ContentValues.TAG,
                                     "DocumentSnapshot added with ID: ${documentReference.id}"
                                 )
+
                             }
                             .addOnFailureListener { e ->
                                 Log.w(ContentValues.TAG, "Error adding document", e)
                             }
-                    })
+                        Toast.makeText(context, "Contacto registrado", Toast.LENGTH_SHORT).show()
+
+                            navController.popBackStack()
+                            navController.navigate(AppScreen.Contact.route)
+
+
+                    }
+
+                )
                 {
                     Text(text = "Enviar")
 
@@ -193,6 +209,7 @@ fun RegisterBody(navController: NavController)
 
                 }) {
                     Text(text = "Ver Contactos")
+
                 }
             }
         }
